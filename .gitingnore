@@ -1,8 +1,7 @@
 ### IntelliJ IDEA ###
-.idea/
+.idea
 *.iml
-out/
-target/
-
+*.iws
+*.ipr
 
 assessments
