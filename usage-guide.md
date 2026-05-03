@@ -33,7 +33,7 @@ Once triggered, the skill:
 3. Reads the code in depth — all service and domain classes, controllers, error handling, and representative tests
 4. Runs mandatory named checks: anemic domain model, architecture layer evidence, framework selection, type-system bypass/runtime interpreter, static analysis suppression, and high-maintenance readability
 5. Drafts and cross-checks ratings across six dimensions for internal consistency
-6. Writes the final report to `docs/assessments/<repo-name>-assessment.md`
+6. Writes the final report to `docs/assessments/<repo-name>-assessment.md`, including a normalized `Synthesis Input Summary` for cross-repository synthesis
 
 ---
 
@@ -85,6 +85,8 @@ Before using the report as input to a later orchestrator or standards process, v
 - it captured both strengths and weaknesses
 - it distinguished systemic versus local issues
 - the archetype detection makes sense for the codebase
+- the `Synthesis Input Summary` ratings match the final dimension ratings
+- the selected risk tags are supported by evidence in the report
 
 ---
 
@@ -102,6 +104,7 @@ The skill follows this sequence automatically:
 8. Complete the assessment template
 9. Record top recurring risks
 10. Record strongest examples for future standards
+11. Complete the Synthesis Input Summary so later standards and learning-recommendation synthesis can aggregate results consistently
 
 ---
 

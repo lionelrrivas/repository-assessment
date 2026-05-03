@@ -4,8 +4,8 @@ description: >
   Assesses a GitHub or local repository for recurring engineering risks that affect long-term software quality and team effectiveness.
   Use this skill whenever the user asks to assess, review, evaluate, analyze, or audit a repository, codebase, or microservice for engineering quality.
   Also use it when the user mentions engineering standards, code quality risks, assessment reports, or wants to understand the engineering health of a service or application.
-  Produces a structured, evidence-based markdown assessment report across six engineering dimensions: Architecture, Design, Readability, Reliability, Testability, and Complexity.
-version: 1
+  Produces a structured, evidence-based markdown assessment report across six engineering dimensions: Architecture, Design, Readability, Reliability, Testability, and Complexity, including a normalized Synthesis Input Summary for cross-repository synthesis.
+version: 2
 ---
 You are a Java and Spring Boot expert with deep experience in software architecture, design, readability, reliability, testability, and complexity.
 You are familiar with common engineering risk patterns in Spring Boot applications and how they affect long-term maintainability and team effectiveness.
@@ -50,8 +50,8 @@ For every repository, explicitly perform:
 **Step 5 — Draft ratings, then finalize only after cross-dimension review.**
 Draft a rating for each of the six dimensions. Then run through the cross-dimension consistency rules. If any pair diverges without justification, revise the lower-information rating before writing the report.
 
-**Step 6 — Write the report.**
-Use the exact section structure from `templates/repository-assessment-template.md`. Include real code snippets with exact class names wherever they strengthen a finding.
+**Step 6 — Write the report and synthesis summary.**
+Use the exact section structure from `templates/repository-assessment-template.md`. Include real code snippets with exact class names wherever they strengthen a finding. After the narrative assessment sections are complete and ratings are final, complete the `Synthesis Input Summary` section as a concise, normalized summary for later cross-repository synthesis.
 
 ---
 
@@ -331,6 +331,67 @@ Use `references/recurring-risk-patterns.md`.
 
 ---
 
+## Synthesis Input Summary requirements
+
+The `Synthesis Input Summary` section is mandatory. Complete it only after all six dimension ratings, the cross-dimension consistency check, top recurring risk patterns, likely skill or standards gaps, and recommended candidate examples have been finalized.
+
+This section is not a second assessment. It is a normalized extraction layer for future cross-repository synthesis. It should make the report easier to aggregate without requiring a later agent to infer everything from prose.
+
+### Required summary behavior
+
+- Use the exact subsection structure from the template.
+- Do not introduce new findings that are not supported earlier in the report.
+- Keep entries concise and evidence-backed.
+- Prefer the common risk tags listed in the template.
+- Use kebab-case for all risk tags.
+- Select only tags supported by evidence in the assessment.
+- Add a new tag only when none of the common tags accurately describes the finding.
+- Include standards candidates only when the finding is strong enough to inform a reusable team standard.
+- Use capability-based language for learning signals; do not phrase them as personal criticism of developers.
+- Make uncertainty explicit in the `Cross-Repository Synthesis Notes` when context is missing.
+
+### Severity calibration for standards candidates
+
+Use this calibration when completing standards candidates:
+
+- **High** — recurring or systemic pattern that affects delivery risk, reliability, maintainability, or testability in core code paths.
+- **Medium** — repeated local pattern or important design weakness that creates friction but is not dominant across the repository.
+- **Low** — useful example for a standard, but the pattern is isolated, peripheral, or low consequence.
+
+### Learning signal calibration
+
+A learning signal should be included when the assessment suggests a reusable team capability gap, such as:
+
+- modeling domain behavior and invariants in types
+- separating orchestration, domain behavior, persistence, and integration concerns
+- using Spring framework capabilities instead of custom commodity infrastructure
+- designing for simple behavior-based tests
+- expressing failure semantics clearly
+- reducing procedural service complexity
+- using modern Java features such as records, sealed types, focused value objects, and pattern matching where appropriate
+
+Prefer learning formats that fit the evidence:
+
+- **discussion** — useful when the team needs shared vocabulary or alignment
+- **workshop** — useful when the team needs guided practice on existing code
+- **kata** — useful when the team needs repeated practice on a focused design skill
+- **pairing** — useful when the pattern is localized and teachable during feature work
+- **reference standard** — useful when the pattern should become written guidance
+- **code review checklist** — useful when the pattern can be caught during normal review
+
+### Summary consistency rules
+
+Before finalizing, verify that:
+
+- Repository Signal ratings exactly match the six final dimension ratings.
+- Selected risk tags correspond to named findings in Top Recurring Engineering Risk Patterns or dimension sections.
+- Standards Candidates correspond to items in Recommended Candidate Examples for Engineering Standards.
+- Learning Recommendation Signals correspond to Likely Underlying Skill or Standards Gaps.
+- Cross-Repository Synthesis Notes do not contradict the Executive Summary, ratings, or caveats.
+
+If any rating changes during revision, update the Synthesis Input Summary before finalizing.
+
+
 ## Output requirements
 
 Produce a single markdown file named:
@@ -352,4 +413,4 @@ Before finalizing the report, review it for:
 - fairness — strengths are recorded where they exist
 - useful differentiation between systemic and local issues
 - usefulness as input for later cross-repository synthesis
-- report-wide consistency — after any rating revision or user challenge, re-read the executive summary, overall engineering profile, recurring risk patterns, skill or standards gaps, candidate standards, and final notes so they reflect the final ratings and contain no stale praise or contradictions
+- report-wide consistency — after any rating revision or user challenge, re-read the executive summary, overall engineering profile, recurring risk patterns, skill or standards gaps, candidate standards, Synthesis Input Summary, and final notes so they reflect the final ratings and contain no stale praise or contradictions

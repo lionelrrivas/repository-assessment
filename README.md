@@ -13,6 +13,8 @@ The assessment is intended to feed a later orchestration step for:
 - learning recommendations
 - engineering standards drafting
 
+Each report now includes a `Synthesis Input Summary` section that normalizes repository signals, risk pattern tags, standards candidates, and learning recommendation signals for easier aggregation across repositories.
+
 ## What is included
 
 - [SKILL.md](SKILL.md) — the main skill definition and assessment instructions
@@ -47,6 +49,7 @@ Each assessment should:
 - detect the primary application archetype automatically
 - include an executive summary and a detailed engineering assessment
 - include real code snippets with exact names
+- include a normalized `Synthesis Input Summary` for later aggregation
 - focus on recurring patterns rather than isolated trivia
 - distinguish structural issues from local issues
 - call out likely cause categories with appropriate caution
