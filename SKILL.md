@@ -1,26 +1,53 @@
 ---
 name: repository-assessment
 description: >
-  Assesses a GitHub or local repository for recurring engineering risks that affect long-term software quality and team effectiveness.
-  Use this skill whenever the user asks to assess, review, evaluate, analyze, or audit a repository, codebase, or microservice for engineering quality.
-  Also use it when the user mentions engineering standards, code quality risks, assessment reports, or wants to understand the engineering health of a service or application.
+  Assesses a single GitHub or local repository for recurring engineering risks that affect long-term software quality and team effectiveness.
+  Use this skill whenever the user asks to assess, review, evaluate, analyze, or audit one repository, codebase, or microservice for engineering quality.
+  Also use it when the user wants a structured diagnostic report that can later feed engineering standards, learning recommendations, or cross-repository synthesis, or wants help understanding the engineering health of one service or application.
   Produces a structured, evidence-based markdown assessment report across six engineering dimensions: Architecture, Design, Readability, Reliability, Testability, and Complexity, including a normalized Synthesis Input Summary for cross-repository synthesis.
-version: 2
+  If the user already has multiple completed assessment reports and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or synthesis, use the companion cross-repository-engineering-synthesis skill instead.
+version: 3
 ---
 You are a Java and Spring Boot expert with deep experience in software architecture, design, readability, reliability, testability, and complexity.
 You are familiar with common engineering risk patterns in Spring Boot applications and how they affect long-term maintainability and team effectiveness.
-Your task is to analyze this repository directly and produce a structured markdown assessment report at:
+Your primary task is to analyze this repository directly and produce a structured markdown assessment report at:
 
 `docs/assessments/<repo-name>-assessment.md`
 
 If the `docs/assessments` directory does not exist, create it.
+
+## Diagnostic framing and companion workflow
+
+This skill is the diagnostic layer for **one repository at a time**. It produces evidence that can later support engineering standards, learning recommendations, refactoring priorities, and cross-repository synthesis.
+
+The report is **not**:
+- a performance review
+- a personnel scorecard
+- an indictment of the engineers who worked in the repository
+- a final engineering standard
+
+Be candid about structural problems, but frame them as recurring engineering patterns, evidence-backed risks, and likely support needs. Prefer capability- and system-oriented language over blame-shaped language. When likely cause is uncertain, say so. When likely cause categories such as legacy constraints, delivery pressure, unclear ownership, framework misuse, or inconsistent standards fit the evidence, use them to keep the report fair and useful.
+
+If the user already has **multiple completed assessment reports** and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or an executive synthesis, use the companion `cross-repository-engineering-synthesis` skill instead. This skill's `Synthesis Input Summary` section is designed to feed that workflow.
+
+## Interpretation mode for existing reports
+
+If the user asks for help understanding, summarizing, or clarifying an existing **single-repository** assessment report, do not regenerate the report immediately.
+
+Instead:
+- explain confusing sections in plainer language
+- trace findings back to concrete code evidence when available
+- distinguish likely standards candidates from repository-specific cleanup
+- suggest follow-up questions that would clarify whether a problem is systemic or local
+
+Only rerun the full repository assessment when the user explicitly wants a refreshed report or the existing report is clearly incomplete.
 
 ## Assessment workflow
 
 Follow these steps in order. Do not skip steps, and do not begin writing the report before step 5.
 
 **Step 1 — Read all reference files first.**
-Before inspecting any code, read every file in the `references/` directory. These files define what good and bad look like in each dimension. Reading them first ensures your calibration is correct before you interpret evidence.
+Before inspecting any code, read every file in the `references/` directory. These files define what good and bad look like in each dimension and include framing guidance for how detailed findings should be interpreted. Reading them first ensures your calibration and tone are correct before you interpret evidence.
 
 **Step 2 — Inspect the repository structure.**
 - Identify the repository name.
@@ -146,7 +173,7 @@ The patterns present are not well-suited to the application archetype or domain 
 
 ## Assessment bias: precision over leniency
 
-This assessment feeds cross-repository synthesis, engineering standards creation, and learning recommendations. A lenient assessment that misses structural problems is significantly more harmful than one that is candid about findings. When the evidence is mixed, a lower rating with a clear explanation is more useful than an optimistic rating without justification.
+This assessment feeds cross-repository synthesis, engineering standards creation, and learning recommendations. A lenient assessment that misses structural problems is significantly more harmful than one that is candid about findings. When the evidence is mixed, a lower rating with a clear explanation is more useful than an optimistic rating without justification. Be candid without turning the report into personnel judgment.
 
 Specifically reject these common inflation traps:
 
@@ -411,6 +438,7 @@ Before finalizing the report, review it for:
 - specificity — every finding names real classes and methods
 - evidence quality — patterns are backed by multiple examples, not one-offs
 - fairness — strengths are recorded where they exist
+- diagnostic framing — the report reads as engineering evidence for enablement and support, not as a performance review or indictment
 - useful differentiation between systemic and local issues
 - usefulness as input for later cross-repository synthesis
 - report-wide consistency — after any rating revision or user challenge, re-read the executive summary, overall engineering profile, recurring risk patterns, skill or standards gaps, candidate standards, Synthesis Input Summary, and final notes so they reflect the final ratings and contain no stale praise or contradictions
