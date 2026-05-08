@@ -1,8 +1,21 @@
 # Usage Guide
 
+Repository Assessment works best when you use it as a repeatable evidence-gathering workflow, not a one-off audit. This guide focuses on how to trigger the skill effectively, how to review the output, and how to move from detailed findings to useful standards work.
+
+## When to use it
+
+Use the skill when you want to understand the engineering health of a checked-out Java/Spring Boot repository and turn that assessment into better standards, learning plans, or refactoring priorities.
+
+It is especially useful when you want to:
+
+- assess a repository for engineering quality
+- compare multiple repositories before drafting standards
+- understand recurring design or architecture risks
+- gather evidence for coaching or learning recommendations
+
 ## How to trigger the skill
 
-With the skill installed, Copilot will invoke it automatically when you ask to assess, review, evaluate, or audit a repository. Just ask naturally from inside the target checked-out repository:
+With the skill installed, Copilot will invoke it automatically when you ask to assess, review, evaluate, analyze, or audit a repository. Ask naturally from inside the target checked-out repository:
 
 ```
 Assess this repository for engineering quality.
@@ -13,29 +26,25 @@ Review this codebase and give me an assessment report.
 ```
 
 ```
-Audit this microservice — I'm particularly interested in architecture and testability.
+Audit this microservice - I'm particularly interested in architecture and testability.
 ```
 
 ```
 Analyze this repo and produce a structured report at docs/assessments/.
 ```
 
-You do not need to name the skill or paste any prompts. The skill handles the full workflow automatically.
-
----
+You do not need to name the skill or paste a long system prompt. The skill handles the workflow automatically.
 
 ## What the skill does
 
 Once triggered, the skill:
 
-1. Reads all reference guides (architecture, design, readability, reliability, testability, complexity)
-2. Detects the primary application archetype (REST API, Kafka consumer, Camunda workflow, batch job, etc.)
-3. Reads the code in depth — all service and domain classes, controllers, error handling, and representative tests
-4. Runs mandatory named checks: anemic domain model, architecture layer evidence, framework selection, type-system bypass/runtime interpreter, static analysis suppression, and high-maintenance readability
-5. Drafts and cross-checks ratings across six dimensions for internal consistency
-6. Writes the final report to `docs/assessments/<repo-name>-assessment.md`, including a normalized `Synthesis Input Summary` for cross-repository synthesis
-
----
+1. Reads the reference guides before interpreting repository evidence.
+2. Detects the primary application archetype.
+3. Inspects the repository structure and representative flow paths.
+4. Reviews service, domain, controller/listener, error-handling, configuration, and representative test code.
+5. Runs mandatory named checks for recurring risk patterns and rating consistency.
+6. Writes the final report to `docs/assessments/<repo-name>-assessment.md`, including a normalized `Synthesis Input Summary`.
 
 ## The six assessment dimensions
 
@@ -45,84 +54,96 @@ Once triggered, the skill:
 | **Design** | Domain model richness, design patterns, invariant enforcement |
 | **Readability** | Clarity, naming, intent communication, self-documenting structure |
 | **Reliability** | Exception handling, failure modes, defensive construction |
-| **Testability** | Whether the *production design* enables simple, isolated tests |
-| **Complexity** | Cognitive load, method size, coupling, accidental vs inherent complexity |
+| **Testability** | Whether the production design enables simple, isolated tests |
+| **Complexity** | Cognitive load, method size, coupling, accidental versus inherent complexity |
 
-Each dimension is rated **Strong**, **Adequate**, **Concerning**, or **Weak** with real code evidence.
-
----
+Each dimension is rated **Strong**, **Adequate**, **Concerning**, or **Weak** and is backed by concrete code evidence.
 
 ## Recommended workflow
 
-### 1. Open the target repository
+### 1. Start with representative repositories
 
-Run the skill from inside the checked-out repository. The skill inspects the local file system directly.
+If your real goal is standards creation, begin with 3 to 5 repositories that give you a fair sample:
 
-### 2. Trigger the assessment
+- one relatively healthy repository
+- one average repository
+- one painful or high-friction repository
+- more than one archetype if possible
 
-Ask Copilot to assess the repository. See example prompts above.
+### 2. Run the assessment from inside the target repository
 
-### 3. Let the skill inspect the code first
+The skill inspects the local file system directly, so run it from the checked-out repository you want assessed.
 
-The skill reads the reference guides and code before writing anything. This is by design — do not interrupt or redirect it during the inspection phase.
+### 3. Let the skill inspect before redirecting it
+
+The skill reads reference material and repository code before writing the report. That inspection phase is deliberate. Let it gather evidence before trying to steer the conclusions.
 
 ### 4. Challenge shallow findings
 
-If the first pass is weak, follow up with prompts like:
+If the first pass feels weak, follow up with prompts like:
 
 - Show stronger evidence for the architecture concerns.
 - Which findings are structural versus local?
 - What does this repo reveal about design-for-testability?
-- Which code examples are strongest candidates for future standards?
+- Which examples are strongest candidates for future standards?
 - Where is the complexity inherent versus accidental?
 
-### 5. Review the output
+### 5. Review the report for signal quality
 
-Before using the report as input to a later orchestrator or standards process, validate:
+Before using the report downstream, check that it:
 
-- it found recurring patterns rather than isolated trivia
-- it used real code evidence with exact class names
-- it captured both strengths and weaknesses
-- it distinguished systemic versus local issues
-- the archetype detection makes sense for the codebase
-- the `Synthesis Input Summary` ratings match the final dimension ratings
-- the selected risk tags are supported by evidence in the report
+- finds recurring patterns rather than isolated trivia
+- uses real code evidence with exact class names
+- captures both strengths and weaknesses
+- distinguishes systemic issues from local issues
+- identifies the archetype sensibly
+- keeps the `Synthesis Input Summary` consistent with the final ratings
+- uses risk tags that are supported by the evidence
 
----
+If a reviewer finds the report difficult to understand, ask Copilot to explain the confusing sections, restate findings in plainer language, trace a claim back to its code evidence, or suggest focused follow-up questions.
 
-## Recommended repo assessment sequence
+Try prompts like:
 
-The skill follows this sequence automatically:
+- Explain the Design section in plainer language.
+- Show me the strongest code evidence behind this finding.
+- Which findings here look like standards candidates versus repository-specific cleanup?
+- Summarize this report for an engineering manager who is new to this workflow.
+- What follow-up questions should I ask to tell whether this problem is systemic or local?
 
-1. Identify archetype and context
-2. Review package and module structure
-3. Inspect representative flow paths
-4. Inspect key design hotspots
-5. Inspect exception and failure handling
-6. Inspect representative tests
-7. Draft ratings and run cross-dimension consistency checks
-8. Complete the assessment template
-9. Record top recurring risks
-10. Record strongest examples for future standards
-11. Complete the Synthesis Input Summary so later standards and learning-recommendation synthesis can aggregate results consistently
+### 6. Move from assessment to standards carefully
 
----
+Do not turn one repository's report directly into organization-wide policy. Review multiple assessments first, then synthesize the recurring patterns into standards candidates and learning recommendations.
 
-## Good pilot usage
+## Using the output responsibly
 
-Start with 3 to 5 representative repositories:
+The report is intentionally detailed because it is diagnostic evidence. That does **not** mean every finding should become a rule, a public talking point, or a team-wide mandate.
 
-- one relatively healthy repo
-- one average repo
-- one painful or complex repo
-- more than one archetype if possible
+Repository state is shaped by more than individual skill. Legacy constraints, delivery pressure, evolving ownership, missing examples, and inconsistent standards often leave visible marks in the code. Read the report as evidence about the system and the support a team may need, not as a verdict on the people involved.
 
----
+Use the output to:
+
+- identify recurring risks worth standardizing
+- separate repository cleanup from broader standards work
+- spot learning opportunities and coaching needs
+- identify where teams need clearer examples, pairing, workshops, checklists, or refactoring time
+- ground engineering conversations in evidence instead of anecdotes
+
+### Healthy response to uncomfortable findings
+
+When a report surfaces painful patterns:
+
+- start with pattern-level questions, not person-level judgments
+- ask which issues are systemic, inherited, or repeated across repositories
+- turn repeated findings into enablement actions such as standards, reference examples, and learning plans
+- keep raw assessment reports out of grading and performance conversations
+
+For broader sharing, pair the report with [references/how-to-read-repository-assessment-reports.md](references/how-to-read-repository-assessment-reports.md). That framing note helps skeptical engineers and managers interpret the detail correctly.
 
 ## What not to do
 
-- Do not use this to grade developers.
-- Do not treat the current repo patterns as accepted standards.
-- Do not overgeneralize from one dramatic class.
+- Do not use the report to grade developers.
+- Do not use the findings as evidence in performance reviews.
+- Do not treat current repository patterns as accepted standards.
+- Do not overgeneralize from one dramatic class or one painful repository.
 - Do not let Copilot act as the sole authority.
-- Do not convert findings directly into enforcement rules without later validation.
+- Do not convert raw findings directly into enforcement rules without cross-repository validation.
