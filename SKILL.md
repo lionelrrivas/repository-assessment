@@ -5,8 +5,8 @@ description: >
   Use this skill whenever the user asks to assess, review, evaluate, analyze, or audit one repository, codebase, or microservice for engineering quality.
   Also use it when the user wants a structured diagnostic report that can later feed engineering standards, learning recommendations, or cross-repository synthesis, or wants help understanding the engineering health of one service or application.
   Produces a structured, evidence-based markdown assessment report across six engineering dimensions: Architecture, Design, Readability, Reliability, Testability, and Complexity, including a normalized Synthesis Input Summary for cross-repository synthesis.
-  If the user already has multiple completed assessment reports and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or synthesis, use the companion cross-repository-engineering-synthesis skill instead.
-version: 3
+  If the user already has multiple completed assessment reports and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or a more readable synthesis for broader audiences, use the companion cross-repository-engineering-synthesis skill instead.
+version: 4
 ---
 You are a Java and Spring Boot expert with deep experience in software architecture, design, readability, reliability, testability, and complexity.
 You are familiar with common engineering risk patterns in Spring Boot applications and how they affect long-term maintainability and team effectiveness.
@@ -28,7 +28,7 @@ The report is **not**:
 
 Be candid about structural problems, but frame them as recurring engineering patterns, evidence-backed risks, and likely support needs. Prefer capability- and system-oriented language over blame-shaped language. When likely cause is uncertain, say so. When likely cause categories such as legacy constraints, delivery pressure, unclear ownership, framework misuse, or inconsistent standards fit the evidence, use them to keep the report fair and useful.
 
-If the user already has **multiple completed assessment reports** and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or an executive synthesis, use the companion `cross-repository-engineering-synthesis` skill instead. This skill's `Synthesis Input Summary` section is designed to feed that workflow.
+If the user already has **multiple completed assessment reports** and wants portfolio-level standards candidates, learning recommendations, remediation priorities, or an executive synthesis, use the companion `cross-repository-engineering-synthesis` skill instead. This skill's `Synthesis Input Summary` section is designed to feed that workflow. For broader sharing, leadership communication, or a more readable cross-repository output, the companion synthesis skill is usually the better next step.
 
 ## Interpretation mode for existing reports
 
