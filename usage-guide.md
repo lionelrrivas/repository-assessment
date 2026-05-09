@@ -1,6 +1,6 @@
 # Usage Guide
 
-Repository Assessment works best when you use it as a repeatable evidence-gathering workflow, not a one-off audit. This guide focuses on how to trigger the skill effectively, how to review the output, and how to move from detailed findings to useful standards work.
+Repository Assessment works best when you use it as a repeatable evidence-gathering workflow, not a one-off audit. This guide focuses on how to trigger the skill effectively, how to review the output, and how to move from detailed findings to the companion synthesis step and then into useful standards work.
 
 ## When to use it
 
@@ -46,6 +46,8 @@ Once triggered, the skill:
 5. Runs mandatory named checks for recurring risk patterns and rating consistency.
 6. Writes the final report to `docs/assessments/<repo-name>-assessment.md`, including a normalized `Synthesis Input Summary`.
 
+That detailed report is usually not the final artifact you want to share broadly. In most multi-repository workflows, it becomes the input to the companion **cross-repository-engineering-synthesis** skill, which produces a more readable, cross-repository output for standards discussions and leadership communication.
+
 ## The six assessment dimensions
 
 | Dimension | What it covers |
@@ -85,7 +87,7 @@ If the first pass feels weak, follow up with prompts like:
 - Show stronger evidence for the architecture concerns.
 - Which findings are structural versus local?
 - What does this repo reveal about design-for-testability?
-- Which examples are strongest candidates for future standards?
+- Which examples are the strongest candidates for future standards?
 - Where is the complexity inherent versus accidental?
 
 ### 5. Review the report for signal quality
@@ -110,15 +112,21 @@ Try prompts like:
 - Summarize this report for an engineering manager who is new to this workflow.
 - What follow-up questions should I ask to tell whether this problem is systemic or local?
 
-### 6. Move from assessment to standards carefully
+### 6. Move from assessment to synthesis, then to standards carefully
 
-Do not turn one repository's report directly into organization-wide policy. Review multiple assessments first, then synthesize the recurring patterns into standards candidates and learning recommendations.
+Do not turn one repository's report directly into organization-wide policy. Review multiple assessments first, then run the companion **cross-repository-engineering-synthesis** skill to turn those detailed reports into a more readable synthesis. Use that synthesis to identify standards candidates, learning recommendations, and repository-specific remediation.
+
+### 7. Prefer synthesis for broader audiences
+
+Single-repository assessment reports are intentionally detailed and can feel overwhelming outside the immediate review group. For leaders, standards authors, or wider team communication, the companion **cross-repository-engineering-synthesis** skill usually produces the better artifact to share.
 
 ## Using the output responsibly
 
 The report is intentionally detailed because it is diagnostic evidence. That does **not** mean every finding should become a rule, a public talking point, or a team-wide mandate.
 
 Repository state is shaped by more than individual skill. Legacy constraints, delivery pressure, evolving ownership, missing examples, and inconsistent standards often leave visible marks in the code. Read the report as evidence about the system and the support a team may need, not as a verdict on the people involved.
+
+If your organization also has audit or compliance expectations, keep those in a separate standards or controls baseline. Examples include approved platform versions such as Java 25 or Spring Boot 4, required pull request approval counts, and required repository files such as `README.md`. Repository Assessment can supply evidence that helps you shape those requirements, but it is not the source of truth for enforcing them.
 
 Use the output to:
 
@@ -127,6 +135,8 @@ Use the output to:
 - spot learning opportunities and coaching needs
 - identify where teams need clearer examples, pairing, workshops, checklists, or refactoring time
 - ground engineering conversations in evidence instead of anecdotes
+
+In most cases, the best way to do that at scale is to move from single-repository assessments into the companion **cross-repository-engineering-synthesis** workflow before broad sharing or final standards drafting.
 
 ### Healthy response to uncomfortable findings
 

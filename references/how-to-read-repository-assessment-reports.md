@@ -17,7 +17,7 @@ The report gives us evidence. The cross-repository synthesis decides which patte
 | Artifact | Purpose | Audience | Level of detail |
 |---|---|---|---|
 | Repository assessment | Diagnose risks in one repository | Reviewers, leads, standards authors | High detail |
-| Cross-repository synthesis | Identify recurring patterns across repositories | Leads, architects, engineering managers | Medium detail |
+| Cross-repository synthesis | Turn multiple assessment reports into more readable cross-repository guidance | Leads, architects, engineering managers, broader stakeholders | Medium detail |
 | Engineering standards | Define shared team expectations | All developers | Concise and practical |
 | Learning recommendations | Help developers improve specific skills | Team members, mentors | Supportive and targeted |
 
