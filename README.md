@@ -17,13 +17,9 @@ Used well, the output supports engineering enablement: clearer standards, better
 
 ## The problem it solves
 
-Most standards work starts from the wrong inputs: strong opinions, one dramatic incident, or a quick skim of a codebase. That usually leads to one of three outcomes:
+Standards built on opinions, isolated incidents, or quick codebase scans usually fail. They produce generic rules, turn local quirks into organization-wide guidance, and make standards discussions feel personal.
 
-- standards that are too generic to change behavior
-- one repository's quirks getting mistaken for organization-wide guidance
-- uncomfortable discussions that feel personal because the evidence is thin
-
-Repository Assessment creates a repeatable diagnostic step before standards work begins. It inspects the code in depth, captures recurring patterns across six engineering dimensions, and produces a normalized summary that can be synthesized across repositories.
+Repository Assessment gives you a better starting point: a repeatable, evidence-based diagnosis of one repository that you can compare and synthesize across many repositories before turning findings into standards.
 
 ## Why teams use it
 
