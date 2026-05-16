@@ -4,7 +4,7 @@
 
 Repository Assessment is a GitHub Copilot skill for evaluating one checked-out Java/Spring Boot repository at a time and producing a structured engineering assessment at `docs/assessments/<repo-name>-assessment.md`.
 
-Use it when you want evidence you can trust before drafting standards, planning refactors, or deciding where teams need better examples, coaching, or support. In most portfolio workflows, each repository assessment then feeds the companion **cross-repository-engineering-synthesis** skill, which turns several detailed reports into a more readable, decision-oriented synthesis.
+Use it when you want evidence you can trust before drafting standards, planning refactors, or deciding where teams need better examples, coaching, or support. In most portfolio workflows, each repository assessment then feeds the companion **[cross-repository-engineering-synthesis](https://github.com/lionelrrivas/cross-repository-synthesis)** skill, which turns several detailed reports into a more readable, decision-oriented synthesis.
 
 ## The problem it solves
 
