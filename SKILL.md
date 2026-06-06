@@ -136,6 +136,22 @@ For each dimension:
 - **Medium** — pattern inferred from partial evidence, or present in some areas but not consistent
 - **Low** — limited code was accessible, few examples found, or the pattern is ambiguous
 
+### Rating distribution calibration
+
+Before finalizing the report, review the full rating distribution across all six dimensions.
+
+If all six dimensions receive the same rating, especially `Concerning` or `Weak`, add an explicit calibration explanation in the report. The explanation must answer:
+
+- why no dimension qualifies for a higher rating
+- whether the identical ratings come from a shared root cause or from independent findings
+- which localized strengths were found
+- why those localized strengths do not offset the final ratings
+- whether any dimension is close to the next higher or lower level
+
+Do not soften a rating merely to create variety. Identical ratings are allowed when the evidence supports them. The purpose of this check is defensibility, not forced differentiation.
+
+If a harsh report contains meaningful localized strengths, record them clearly as strengths that do not offset the structural rating. This prevents the report from reading as though no good engineering work exists while still preserving the correct calibration.
+
 ---
 
 ## Qualitative levels defined
@@ -209,6 +225,10 @@ Dimensions are not independent. They share root causes and amplify each other's 
 **Reliability ↔ Design**: When domain types can be constructed in invalid states and validation is scattered or external, reliability becomes dependent on every call site performing validation correctly. Likewise, when core processing bypasses available types and relies on runtime path lookup, raw maps, or generic `Object` pipelines, reliability depends on string expressions resolving correctly at runtime and on failures being surfaced rather than silently defaulted. These are systemic reliability risks rooted in design weakness. Note both.
 
 When ratings diverge significantly (e.g., Design is Concerning but Testability is Adequate), you must either: justify explicitly why the design problems are not creating testability friction, or revise the higher rating downward. Divergence without explanation is a calibration error.
+
+### Cross-dimension evidence requirement
+
+Every cross-dimension consistency row or statement in the final report must include repository-specific evidence. Do not use placeholders such as `—`, `N/A`, `not assessed`, or generic assertions. If a relationship does not apply, explain why it does not apply using the detected application archetype or code evidence. If evidence is incomplete, say what was inspected and why confidence is limited.
 
 ---
 
@@ -441,3 +461,6 @@ Before finalizing the report, review it for:
 - useful differentiation between systemic and local issues
 - usefulness as input for later cross-repository synthesis
 - report-wide consistency — after any rating revision or user challenge, re-read the executive summary, overall engineering profile, recurring risk patterns, skill or standards gaps, candidate standards, Synthesis Input Summary, and final notes so they reflect the final ratings and contain no stale praise or contradictions
+- rating calibration — if all dimensions share the same rating, the report explains why the uniform rating is justified
+- localized strengths — harsh findings still identify concrete strengths where they exist and explain why they do not offset systemic risk
+- cross-dimension evidence completeness — no cross-dimension consistency table entry uses placeholders or evidence-free assertions
