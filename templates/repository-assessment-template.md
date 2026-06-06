@@ -11,6 +11,16 @@
 ## Executive Summary
 Write a short summary suitable for leadership or socialization. Focus on the most important recurring engineering patterns, the most significant risks, and the most important strengths. Do not praise a class, mechanism, or extension point that the final ratings identify as a core weakness.
 
+## Rating Calibration Note
+
+Use this section when all six dimensions receive the same rating, or when several dimensions are tightly clustered.
+
+- **Why the rating distribution is justified:**
+- **Shared root cause, if any:**
+- **Localized strengths that do not offset the rating:**
+- **Dimensions closest to a different rating:**
+- **Confidence in calibration:** High / Medium / Low
+
 ## Overall Engineering Profile
 Write a concise narrative summary of the repository's engineering profile. Focus on recurring patterns rather than isolated issues. Keep this section aligned with the final dimension ratings.
 
